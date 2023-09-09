@@ -1,0 +1,26 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.12,
+* Autoprefixer: v10.4.4
+* Browsers: last 4 version
+*/
+
+/* Resp */
+/* Large */
+/* Medium */
+@media (max-width: 991px) {
+  .card > .details {
+    padding: 0.8em;
+  }
+  .col-for-tablet {
+    display: block;
+  }
+}
+
+/* Small */
+/* Extra small */
+@media (max-width: 575px) {
+  .social__item {
+    margin: 0.2rem;
+  }
+}

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Register</title>
+        <link rel="stylesheet" href="./FONT/fontawesome-free-5.15.4-web/css/all.min.css">
+        <link rel="stylesheet" href="./UTIL/bootstrap-4.6.1-dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./CSS/base.min.css">
+        <link rel="stylesheet" href="./CSS/header.min.css">
+        <link rel="stylesheet" href="./CSS/resp_header.min.css">
+        <link rel="stylesheet" href="./CSS/footer.min.css">
+        <link rel="stylesheet" href="./CSS/resp_footer.min.css">
+        <link rel="stylesheet" href="./CSS/login.min.css">
+        <link rel="stylesheet" href="./CSS/resp_login.min.css">
+        <link rel="stylesheet" href="./CSS/Register.min.css">
+        <link rel="stylesheet" href="./CSS/style.min.css">
+    </head>
+    <body>
+        <main class="app">
+            <header></header>
+
+            <section>
+                <div class="container">
+                    <div class="row no-gutters">
+                        <div class="form">
+                            <h3>Create an account</h3>
+                            <form action="" id="register">
+                                <p>
+                                    Already have an account?
+                                    <a href="./Login.html" class="hover-text">Log in instead!</a>
+                                </p>
+                                <div class="form-group">
+                                    <div class="row no-gutters">
+                                        <div class="form-group__item form-group__item--label col col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                                            <label for="">Social title</label>
+                                        </div>
+                                        <div class="form-group__item form-group__item--input form-group__item--radio col col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                            <input id="social-title-mr" value="mr" name="social-title" type="radio">
+                                            <label for="social-title-mr">Mr.</label>
+                                            <input id="social-title-mrs" value="mrs" name="social-title" type="radio">
+                                            <label for="social-title-mrs">Mrs.</label>
+                                        </div>
+                                        <div class="form-group__item form-group__item--msg col col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                                        </div>
+                                        <div class="col col-xl-3 col-lg-3 col-md-3 hidden-small"></div>
+                                        <div class="sm-mx-center form-group__item col col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                            <div class="form-messenger"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row no-gutters">
+                                        <div class="form-group__item form-group__item--label col col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                                            <label for="">First name</label>
+                                        </div>
+                                        <div class="form-group__item form-group__item--input col col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                            <input rule="required|firstName" name="first-name" type="text">
+                                        </div>
+                                        <div class="form-group__item form-group__item--msg col col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                                        </div>
+                                        <div class="col col-xl-3 col-lg-3 col-md-3 hidden-small"></div>
+                                        <div class="sm-mx-center form-group__item col col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                            <div class="form-messenger"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row no-gutters">
+                                        <div class="form-group__item form-group__item--label col col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                                            <label for="">Last name</label>
+                                        </div>
+                                        <div class="form-group__item form-group__item--input col col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                            <input rule="required|lastName" name="last-name" type="text">
+                                        </div>
+                                        <div class="form-group__item form-group__item--msg col col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                                        </div>
+                                        <div class="col col-xl-3 col-lg-3 col-md-3 hidden-small"></div>
+                                        <div class="sm-mx-center form-group__item col col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                            <div class="form-messenger"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row no-gutters">
+                                        <div class="form-group__item form-group__item--label col col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                                            <label for="">Email</label>
+                                        </div>
+                                        <div class="form-group__item form-group__item--input col col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                            <input rule="required|email|uniqueEmail" id="email-id" name="email" type="email">
+                                        </div>
+                                        <div class="form-group__item form-group__item--msg col col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                                        </div>
+                                        <div class="col col-xl-3 col-lg-3 col-md-3 hidden-small"></div>
+                                        <div class="sm-mx-center form-group__item col col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                            <div class="form-messenger"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row no-gutters">
+                                        <div class="form-group__item form-group__item--label col col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                                            <label for="">Password</label>
+                                        </div>
+                                        <div class="form-group__item form-group__item--input form-group__item--text--right col col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                            <input rule="required|min:6" name="password" type="password">
+                                            <span class="form-group__item__text show-password">Show</span>
+                                        </div>
+                                        <div class="form-group__item form-group__item--msg col col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                                        </div>
+                                        <div class="col col-xl-3 col-lg-3 col-md-3 hidden-small"></div>
+                                        <div class="sm-mx-center form-group__item col col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                            <div class="form-messenger"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row no-gutters">
+                                        <div class="form-group__item form-group__item--label col col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                                            <label for="">Birthdate</label>
+                                        </div>
+                                        <div class="form-group__item form-group__item--input col col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                            <input type="text" rule="formatDate|beforeDayNow" name="birthdate" placeholder="DD/MM/YYYY">
+                                        </div>
+                                        <div class="form-group__item form-group__item--msg col col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                                            <span>Optional</span>
+                                        </div>
+                                        <div class="col col-xl-3 col-lg-3 col-md-3 hidden-small"></div>
+                                        <div class="sm-mx-center form-group__item col col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                            <div class="form-messenger"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row no-gutters">
+                                        <div class="form-group__item form-group__item--label col col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                                            <label for="">Verification codes</label>
+                                        </div>
+                                        <div class="form-group__item form-group__item--input form-group__item--text--right col col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                            <input type="text" rule="uniqueSubmitCode" name="submit_code" placeholder="Code Submit In Your Mail">
+                                            <span class="form-group__item__text get-code">Get Code</span>
+                                        </div>
+                                        <div class="form-group__item form-group__item--msg col col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                                        
+                                        </div>
+                                        <div class="col col-xl-3 col-lg-3 col-md-3 hidden-small"></div>
+                                        <div class="sm-mx-center form-group__item col col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                            <div class="form-messenger"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="submit">Save</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer></footer>
+        </main>
+
+        <script src="./JS/Header.min.js"></script>
+        <script src="./JS/Footer.min.js"></script>
+        <script src="./UTIL/jQuery/jQuery.js"></script>
+        <script src="./UTIL/bootstrap-4.6.1-dist/js/bootstrap.min.js"></script>
+        <script src="./JS/toast.min.js"></script>
+        <script src="./JS/smtp.js"></script>
+        <script src="./JS/main.min.js"></script>
+        <script src="./JS/Validator.min.js"></script>
+        <script src="./JS/AuthenticatorForm.min.js"></script>
+        <script src="./JS/Register.min.js"></script>
+    </body>
+</html>
