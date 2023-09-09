@@ -1,41 +1,67 @@
 var url_string = window.location.href;
 var url = new URL(url_string);
-var productSlug = url.searchParams.get("product");
+var productSlug = url.searchParams.get('product');
 
-const getPriceProduct = product => product.discount ? product.price * (100 - product.discount) / 100 : product.price;
+const getPriceProduct = (product) =>
+    product.discount
+        ? (product.price * (100 - product.discount)) / 100
+        : product.price;
 
-fetch(`https://comfortable-fox-gear.cyclic.app/list-products?slug=${productSlug}`)
-    .then(data => data.json())
-    .then(products => {
+fetch(
+    `https://comfortable-fox-gear.cyclic.app/list-products?slug=${productSlug}`,
+)
+    .then((data) => data.json())
+    .then((products) => {
         const product = products[0];
         $('section').html(`
             <div class="site__map">
                 <p><a href="index.html" class="site__map-home">HOME</a> <span> > </span>
-                    <a class="site-map-product-details" href="">${product.name.replace('$$', '\'').toUpperCase()}</a></p>
+                    <a class="site-map-product-details" href="">${product.name
+                        .replace('$$', "'")
+                        .toUpperCase()}</a></p>
             </div>
 
             <div class="form-register-product row no-gutters">
                 <div class="form-register-product-left col col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                     <div class="form-register-product-left__box-image">
                         <div class="form-register-product-left__box-image__status-product">
-                            ${product.productFlags.map(productFlag => `
-                                <span class="form-register-product-left__status_price ${productFlag.toLowerCase().split(' ').join('-')}">${productFlag}</span>
-                            `).join('')}
+                            ${product.productFlags
+                                .map(
+                                    (productFlag) => `
+                                <span class="form-register-product-left__status_price ${productFlag
+                                    .toLowerCase()
+                                    .split(' ')
+                                    .join('-')}">${productFlag}</span>
+                            `,
+                                )
+                                .join('')}
                         </div>
                         <div class="form-register-product__image__product-main">
-                            <img id="zoom-id" src="IMG/${product.imageZoom[0]}" data-zoom-image="IMG/${product.imageZoom[0]}" alt="anh 1" class="form-register-product__image__product__item">
+                            <img id="zoom-id" src="IMG/${
+                                product.imageZoom[0]
+                            }" data-zoom-image="IMG/${
+            product.imageZoom[0]
+        }" alt="anh 1" class="form-register-product__image__product__item">
                         </div>
                         <div class="form-register-product-left__tool-zoom"> <i class="fas fa-search-plus"></i></div>
                     </div>
                     
                     <div class="form-register-product__list" id="thumb-image">
-                        ${product.imageZoom.map((itemImage, index) => `
+                        ${product.imageZoom
+                            .map(
+                                (itemImage, index) => `
                             <div class="form-register-product__list-item">
-                                <a class="form-register-product__list__item__link ${index === 0 && 'active'}" href="#" data-image="IMG/${itemImage}" data-zoom-image="IMG/${itemImage}">
-                                    <img src="IMG/${itemImage}" alt="anh ${index+1}" class="form-register-product__list-img">
+                                <a class="form-register-product__list__item__link ${
+                                    index === 0 && 'active'
+                                }" href="#" data-image="IMG/${itemImage}" data-zoom-image="IMG/${itemImage}">
+                                    <img src="IMG/${itemImage}" alt="anh ${
+                                    index + 1
+                                }" class="form-register-product__list-img">
                                 </a>
                             </div>
-                        `).join('')}                        
+                        `,
+                            )
+                            .join('')}                        
                     </div>
                 </div>
                 <div class="form-register-product-right col col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
@@ -47,9 +73,15 @@ fetch(`https://comfortable-fox-gear.cyclic.app/list-products?slug=${productSlug}
                         <li class="form-register-product-right__item__social"><a href="https://www.pinterest.com/" class="form-register-product-right__link__social"><i class="fab fa-pinterest"></i></a></li>
                     </ul>
                     <div class="form-register-product-right__box-price">
-                        <span class="form-register-product-right__box-price__price-now">$${getPriceProduct(product)}</span>
-                        <span class="form-register-product-right__box-price__price-old ${product.discount || 'hidden'}">$${product.price}</span>
-                        <span class="form-register-product-right__box-price__discount-price ${product.discount || 'hidden'}">(Save ${product.discount}%)</span>
+                        <span class="form-register-product-right__box-price__price-now">$${getPriceProduct(
+                            product,
+                        )}</span>
+                        <span class="form-register-product-right__box-price__price-old ${
+                            product.discount || 'hidden'
+                        }">$${product.price}</span>
+                        <span class="form-register-product-right__box-price__discount-price ${
+                            product.discount || 'hidden'
+                        }">(Save ${product.discount}%)</span>
                         <p class="form-register-product-right__delivery-time">Tax excluded Delivery: <span class="form-register-product-right__delivery-time__number">1 to 3 weeks</span></p>
                         <p class="form-register-product-right__product-description">Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
                     </div>
@@ -59,24 +91,46 @@ fetch(`https://comfortable-fox-gear.cyclic.app/list-products?slug=${productSlug}
                             <p>Size</p>
                         </div>
                         <div class="col col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 row form-register-product-right__option__size-list">
-                            ${product.size.map((size, index) => `
-                                <label for="choose-size-${index+1}" class="form-register-product-right__option__size-list__box">
-                                    <input type="radio" name="product-size" value="${size}" data-product-attribute="${index+1}" id="choose-size-${index+1}" 
-                                    class="form-register-product-right__option__size form-register-product-right__option__choose-list" ${index === 0 && 'checked'}>
+                            ${product.size
+                                .map(
+                                    (size, index) => `
+                                <label for="choose-size-${
+                                    index + 1
+                                }" class="form-register-product-right__option__size-list__box">
+                                    <input type="radio" name="product-size" value="${size}" data-product-attribute="${
+                                        index + 1
+                                    }" id="choose-size-${index + 1}" 
+                                    class="form-register-product-right__option__size form-register-product-right__option__choose-list" ${
+                                        index === 0 && 'checked'
+                                    }>
                                     <span>${size}</span>
                                 </label>
-                            `).join('')}                        
+                            `,
+                                )
+                                .join('')}                        
                         </div>
                         <div class="col col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 form-register-product-right__option__label">
                             <p>Color</p>
                         </div>
                         <div class="col col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9 row form-register-product-right__option__color-list">
-                            ${product.color.map((color, index) => `
-                                <label for="choose-color-${index+1}" class="form-register-product-right__option__color-list__box">
-                                    <input type="radio" value="${color}" name="product-color" id="choose-color-${index+1}" class="form-register-product-right__option__choose-color" ${index === 0 && 'checked'}>
-                                    <span class="color-${index+1}" style="--color: ${color};"></span>
+                            ${product.color
+                                .map(
+                                    (color, index) => `
+                                <label for="choose-color-${
+                                    index + 1
+                                }" class="form-register-product-right__option__color-list__box">
+                                    <input type="radio" value="${color}" name="product-color" id="choose-color-${
+                                        index + 1
+                                    }" class="form-register-product-right__option__choose-color" ${
+                                        index === 0 && 'checked'
+                                    }>
+                                    <span class="color-${
+                                        index + 1
+                                    }" style="--color: ${color};"></span>
                                 </label>
-                            `).join('')}
+                            `,
+                                )
+                                .join('')}
                         </div>
                         <div class="col col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 form-register-product-right__option__label">
                             <p>Quantity</p>
@@ -89,8 +143,16 @@ fetch(`https://comfortable-fox-gear.cyclic.app/list-products?slug=${productSlug}
                     
                     </div>
                     <div class="row form-register-product-right__group-btn">
-                        <div onclick='handlerClickCart(this, ${JSON.stringify(product)}, "#modal-tost", "${product.name} Product successfully added to your shopping cart. <a href=${`/Cart.html`}>View cart.</a>")' class="col col-xl-4 col-lg-4 col-md-6 col-sm-6 col-6 form-register-product-right__add-cart btn">ADD TO CART</div>
-                        <div onclick='handlerClickCompare(this, ${JSON.stringify(product)}, "#modal-tost", "The product has been added to list compare. <a href=${`/ProductsCompare.html`}>View list compare.</a>")' class="col col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 form-register-product-right__add-compare btn ${compareProductList.hasProduct(product) && 'is-added'}"><i class="fas fa-redo-alt"></i>Add to Compare</div>
+                        <div onclick='handlerClickCart(this, ${JSON.stringify(
+                            product,
+                        )}, "#modal-tost", "${
+            product.name
+        } Product successfully added to your shopping cart. <a href=${`/cartPage.html`}>View cart.</a>")' class="col col-xl-4 col-lg-4 col-md-6 col-sm-6 col-6 form-register-product-right__add-cart btn">ADD TO CART</div>
+                        <div onclick='handlerClickCompare(this, ${JSON.stringify(
+                            product,
+                        )}, "#modal-tost", "The product has been added to list compare. <a href=${`/ProductsCompare.html`}>View list compare.</a>")' class="col col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 form-register-product-right__add-compare btn ${
+            compareProductList.hasProduct(product) && 'is-added'
+        }"><i class="fas fa-redo-alt"></i>Add to Compare</div>
                         <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-register-product-right__in-stock btn"><i class="fa-solid fa-check"></i>In stock</div>
                     </div>  
                     <div class="form-register-product-right__service">
@@ -157,58 +219,72 @@ fetch(`https://comfortable-fox-gear.cyclic.app/list-products?slug=${productSlug}
     });
 
 function handleProductDetailPage() {
-    const elemBtnUpQuantity = document.querySelector("#option__color-list__up-quantity");
-    const elemInputQuantity = document.querySelector("#option__color-list__input-quantity");
-    const elemBtnDownQuantity = document.querySelector("#option__color-list__down-quantity");
-    const elemsLinkImageSlickSlide = document.querySelectorAll(".form-register-product__list__item__link");
-    const elemListBtnDesc = Array.from(document.querySelectorAll(".product__list__tab__link"));
-    
-    function start() {  
-        elemInputQuantity.addEventListener("blur", ()=>{
-           
-            let number = parseInt( elemInputQuantity.value);;
-            if (isNaN(number) || number <= 0){
+    const elemBtnUpQuantity = document.querySelector(
+        '#option__color-list__up-quantity',
+    );
+    const elemInputQuantity = document.querySelector(
+        '#option__color-list__input-quantity',
+    );
+    const elemBtnDownQuantity = document.querySelector(
+        '#option__color-list__down-quantity',
+    );
+    const elemsLinkImageSlickSlide = document.querySelectorAll(
+        '.form-register-product__list__item__link',
+    );
+    const elemListBtnDesc = Array.from(
+        document.querySelectorAll('.product__list__tab__link'),
+    );
+
+    function start() {
+        elemInputQuantity.addEventListener('blur', () => {
+            let number = parseInt(elemInputQuantity.value);
+            if (isNaN(number) || number <= 0) {
                 elemInputQuantity.value = 1;
             }
-        })
-        elemBtnUpQuantity.addEventListener("click", () => {
-
+        });
+        elemBtnUpQuantity.addEventListener('click', () => {
             elemInputQuantity.value = elemInputQuantity.value - 0 + 1;
-        })
-        elemBtnDownQuantity.addEventListener("click", () => {
+        });
+        elemBtnDownQuantity.addEventListener('click', () => {
             if (elemInputQuantity.value - 0 > 1) {
                 elemInputQuantity.value -= 1;
             }
-        })
+        });
 
         elemListBtnDesc.forEach((value) => {
-            value.addEventListener("click", (e) => {
+            value.addEventListener('click', (e) => {
                 e.preventDefault();
-                elemActiving = document.querySelector(".product__list__tab__link.active");
-                elemActiving.classList.remove("active");
-                value.classList.add("active");
+                elemActiving = document.querySelector(
+                    '.product__list__tab__link.active',
+                );
+                elemActiving.classList.remove('active');
+                value.classList.add('active');
 
-                elemContentActiving = document.querySelector(".product__box__contentOfTab > .active");
-                elemContentActiving.classList.remove("active");
+                elemContentActiving = document.querySelector(
+                    '.product__box__contentOfTab > .active',
+                );
+                elemContentActiving.classList.remove('active');
 
-                document.querySelector("." + value.id).classList.add("active");
-            })
-        })
-        
+                document.querySelector('.' + value.id).classList.add('active');
+            });
+        });
 
-        $(".form-register-product__list").slick({
+        $('.form-register-product__list').slick({
             infinite: false,
             slidesToShow: 5,
-            prevArrow: '<button class="slide-arrow prev-arrow"><i class="fa-solid fa-angle-left"></i></button>',
-            nextArrow: '<button class="slide-arrow next-arrow"><i class="fa-solid fa-angle-right"></i></button>',
+            prevArrow:
+                '<button class="slide-arrow prev-arrow"><i class="fa-solid fa-angle-left"></i></button>',
+            nextArrow:
+                '<button class="slide-arrow next-arrow"><i class="fa-solid fa-angle-right"></i></button>',
 
-            responsive: [{
+            responsive: [
+                {
                     breakpoint: 991,
                     settings: {
                         slidesToShow: 3,
                         slidesToScroll: 3,
                         infinite: true,
-                    }
+                    },
                 },
                 {
                     breakpoint: 575,
@@ -216,71 +292,63 @@ function handleProductDetailPage() {
                         slidesToShow: 1,
                         slidesToScroll: 1,
                         infinite: true,
-                    }
-                }
+                    },
+                },
             ],
-        })
-        $("#zoom-id").elevateZoom({
-            gallery: "thumb-image",
-            cursor: "pointer",
-            galleryActiveClass: "active",
+        });
+        $('#zoom-id').elevateZoom({
+            gallery: 'thumb-image',
+            cursor: 'pointer',
+            galleryActiveClass: 'active',
             imageCrossfade: true,
             tint: true,
             tintColour: 'rgba(0, 0, 0, 0.5)',
             tintOpacity: 0.5,
-
-
-
         });
-        $(".form-register-product-left__tool-zoom").bind("click", function (e) {
+        $('.form-register-product-left__tool-zoom').bind('click', function (e) {
             var ez = $('#zoom-id').data('elevateZoom');
 
             $.fancybox(ez.getGalleryList());
-            console.log($(".fancybox-item.fancybox-close"))
-            $(".fancybox-item.fancybox-close").html(`aaaaaaaaa`);
+            console.log($('.fancybox-item.fancybox-close'));
+            $('.fancybox-item.fancybox-close').html(`aaaaaaaaa`);
             return false;
-        })
-        $("#zoom-id").bind("click", function (e) {
+        });
+        $('#zoom-id').bind('click', function (e) {
             var ez = $('#zoom-id').data('elevateZoom');
 
             $.fancybox(ez.getGalleryList());
-            console.log($(".fancybox-item.fancybox-close"))
-            $(".fancybox-item.fancybox-close").html(`aaaaaaaaa`);
+            console.log($('.fancybox-item.fancybox-close'));
+            $('.fancybox-item.fancybox-close').html(`aaaaaaaaa`);
             return false;
         });
         elemsLinkImageSlickSlide.forEach((value) => {
-            value.addEventListener("click", (e) => {
+            value.addEventListener('click', (e) => {
                 e.stopPropagation();
                 e.preventDefault();
-            })
-        })
+            });
+        });
     }
     start();
 
     $(window).resize(function () {
         var w = $(window).width();
         if (w <= 575) {
-
             window.location.reload(true);
             start();
-            console.log("load mobile");
+            console.log('load mobile');
             return;
         }
         if (w <= 991) {
-
             window.location.reload(true);
             start();
-            console.log("load tablet");
+            console.log('load tablet');
             return;
         }
         if (w >= 1200) {
-
             window.location.reload(true);
             start();
-            console.log("load pc");
+            console.log('load pc');
             return;
         }
-
-
     });
 }

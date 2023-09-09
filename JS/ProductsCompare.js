@@ -1,82 +1,143 @@
+let compareProducts =
+    JSON.parse(localStorage.getItem('TTTHH-COMPARE-KEY')) ?? [];
 
-let compareProducts = JSON.parse(localStorage.getItem('TTTHH-COMPARE-KEY')) ?? [];
-
-const getPriceProduct = product => product.discount ? product.price * (100 - product.discount) / 100 : product.price;
+const getPriceProduct = (product) =>
+    product.discount
+        ? (product.price * (100 - product.discount)) / 100
+        : product.price;
 
 // * Compare Product List
 
-const removeCompareProducts = slug => {
-    compareProducts = compareProducts.filter(product => product.slug !== slug);
+const removeCompareProducts = (slug) => {
+    compareProducts = compareProducts.filter(
+        (product) => product.slug !== slug,
+    );
 
     localStorage.setItem('TTTHH-COMPARE-KEY', JSON.stringify(compareProducts));
     $('.content__list').html(getHTMLCompareProducts(compareProducts));
-}
+};
 
-const getHTMLCompareProducts = products => {
-
+const getHTMLCompareProducts = (products) => {
     return `                            
         <table class="table-bordered">
                 <tr>
                     <td class="align-top">Features:</td>
-                    ${products.map(product => `
+                    ${products
+                        .map(
+                            (product) => `
                         <td>
                             <div class="content-product__item__delete text-right">
-                                <button onclick="removeCompareProducts('${product.slug}')" class="border-0 bg-white">
+                                <button onclick="removeCompareProducts('${
+                                    product.slug
+                                }')" class="border-0 bg-white">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
                             <div class="content-product__item mx-auto">
                                 <div class="content-product__item__img position-relative">
-                                    <a class="d-block" href="${window.location.href.includes('WebSite_BanGiay_T3H2') ? '/WebSite_BanGiay_T3H2' : ''}/ProductDetaildPage.html?product=${product.slug}">
-                                        <img class="img-contain" src="./IMG/${product.image}" alt="${product.name}">
+                                    <a class="d-block" href="${
+                                        window.location.href.includes(
+                                            'WebSite_BanGiay_T3H2',
+                                        )
+                                            ? '/WebSite_BanGiay_T3H2'
+                                            : ''
+                                    }/ProductDetaildPage.html?product=${
+                                product.slug
+                            }">
+                                        <img class="img-contain" src="./IMG/${
+                                            product.image
+                                        }" alt="${product.name}">
                                     </a>
                                     <ul class="product-flags d-flex flex-wrap list-unstyled">
-                                        ${product.productFlags.map(productFlag => `
-                                            <li class="product-flag ${productFlag.toLowerCase().split(' ').join('-')}">
+                                        ${product.productFlags
+                                            .map(
+                                                (productFlag) => `
+                                            <li class="product-flag ${productFlag
+                                                .toLowerCase()
+                                                .split(' ')
+                                                .join('-')}">
                                                 ${productFlag}
                                             </li>
-                                        `).join('')}
+                                        `,
+                                            )
+                                            .join('')}
                                     </ul>
                                 </div>
-                                <button onclick='handlerClickCart(this, ${JSON.stringify(product)}, "#modal-tost", "${product.name} Product successfully added to your shopping cart. <a href=${`/Cart.html`}>View cart.</a>")' class="btn content-product__item__add-cart col-12">
+                                <button onclick='handlerClickCart(this, ${JSON.stringify(
+                                    product,
+                                )}, "#modal-tost", "${
+                                product.name
+                            } Product successfully added to your shopping cart. <a href=${`/cartPage.html`}>View cart.</a>")' class="btn content-product__item__add-cart col-12">
                                     Add to cart
                                 </button>
                                 <div class="content-product__item__info">
                                     <h4 class="content-product__item__info__title text-center">
-                                        <a href="${window.location.href.includes('WebSite_BanGiay_T3H2') ? '/WebSite_BanGiay_T3H2' : ''}/ProductDetaildPage.html?product=${product.slug}">${product.name}</a>
+                                        <a href="${
+                                            window.location.href.includes(
+                                                'WebSite_BanGiay_T3H2',
+                                            )
+                                                ? '/WebSite_BanGiay_T3H2'
+                                                : ''
+                                        }/ProductDetaildPage.html?product=${
+                                product.slug
+                            }">${product.name}</a>
                                     </h4>
                                     <p class="content-product__item__info__description text-center">Temporibus autem quibusdam et aut officiis debitis aut...</p>
                                     <div class="content-product__item__info__price text-center">
-                                        <span class="price-old ${product.discount || 'hidden'}">$${product.price.toFixed(2)}</span>
-                                        <span class="discount ${product.discount || 'hidden'}">(-${product.discount}%)</span>
-                                        <span class="price">$${getPriceProduct(product).toFixed(2)}</span>
+                                        <span class="price-old ${
+                                            product.discount || 'hidden'
+                                        }">$${product.price.toFixed(2)}</span>
+                                        <span class="discount ${
+                                            product.discount || 'hidden'
+                                        }">(-${product.discount}%)</span>
+                                        <span class="price">$${getPriceProduct(
+                                            product,
+                                        ).toFixed(2)}</span>
                                     </div>
                                 </div>
                             </div>
                         </td>
-                    `).join('')}
+                    `,
+                        )
+                        .join('')}
                 </tr>
                 <tr>
                     <td class="align-top">Compositions</td>
-                    ${products.map(product => `
-                        <td class="text-center">${product.compositions[0] || ''}</td>
-                    `).join('')}
+                    ${products
+                        .map(
+                            (product) => `
+                        <td class="text-center">${
+                            product.compositions[0] || ''
+                        }</td>
+                    `,
+                        )
+                        .join('')}
                 </tr>
                 <tr>
                     <td class="align-top">Styles</td>
-                    ${products.map(product => `
+                    ${products
+                        .map(
+                            (product) => `
                         <td class="text-center">${product.styles[0] || ''}</td>
-                    `).join('')}
+                    `,
+                        )
+                        .join('')}
                 </tr>
                 <tr>
                     <td class="align-top">Properties</td>
-                    ${products.map(product => `
-                        <td class="text-center">${product.properties[0] || ''}</td>
-                    `).join('')}
+                    ${products
+                        .map(
+                            (product) => `
+                        <td class="text-center">${
+                            product.properties[0] || ''
+                        }</td>
+                    `,
+                        )
+                        .join('')}
                 </tr>
             </table>
     `;
-}
+};
 
 (() => {
     const contentListCompare = $('.content__list');
@@ -102,4 +163,11 @@ const getHTMLCompareProducts = products => {
     console.log(compareProducts);
 })();
 
-$('.btn.content__link').attr('href', `${window.location.href.includes('WebSite_BanGiay_T3H2') ? 'https://antphb.github.io/WebSite_BanGiay_T3H2/' : '/'}`);
+$('.btn.content__link').attr(
+    'href',
+    `${
+        window.location.href.includes('WebSite_BanGiay_T3H2')
+            ? 'https://antphb.github.io/WebSite_BanGiay_T3H2/'
+            : '/'
+    }`,
+);
