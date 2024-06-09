@@ -8,7 +8,7 @@ const getPriceProduct = (product) =>
         : product.price;
 
 fetch(
-    `https://comfortable-fox-gear.cyclic.app/list-products?slug=${productSlug}`,
+    `https://electoral-luce-iuh-6067c02c.koyeb.app/list-products?slug=${productSlug}`,
 )
     .then((data) => data.json())
     .then((products) => {

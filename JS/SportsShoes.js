@@ -96,7 +96,9 @@
     `;
 
     Promise.all(
-        urls.map((u) => fetch(`https://comfortable-fox-gear.cyclic.app/${u}`)),
+        urls.map((u) =>
+            fetch(`https://electoral-luce-iuh-6067c02c.koyeb.app/${u}`),
+        ),
     )
         .then((responses) => Promise.all(responses.map((res) => res.text())))
         .then((texts) => {
